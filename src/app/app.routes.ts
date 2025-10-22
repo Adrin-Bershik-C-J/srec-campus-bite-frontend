@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
-import { Verify } from './pages/verify/verify';
-import { Dashboard } from './pages/dashboard/dashboard';
+import { Login } from './pages/auth/login/login';
+import { Register } from './pages/auth/register/register';
+import { Verify } from './pages/auth/verify/verify';
+import { Dashboard } from './pages/user/dashboard/dashboard';
 import { AdminDashboard } from './pages/admin/dashboard/admin-dashboard';
 import { AdminUsers } from './pages/admin/users/admin-users';
 import { AdminProviders } from './pages/admin/providers/admin-providers';
@@ -31,7 +31,7 @@ export const routes: Routes = [
         canActivate: [PublicGuard]
     },
     {
-        path: 'dashboard',
+        path: 'user/dashboard',
         component: Dashboard,
         canActivate: [AuthGuard]
     },

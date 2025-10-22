@@ -2,10 +2,10 @@ import { Component, signal, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Auth } from '../../services/auth';
-import { TokenService } from '../../services/token.service';
-import { LayoutService } from '../../services/layout.service';
-import { VerifyUserOTP } from '../../models/auth.model';
+import { Auth } from '../../../services/auth';
+import { TokenService } from '../../../services/token.service';
+import { LayoutService } from '../../../services/layout.service';
+import { VerifyUserOTP } from '../../../models/auth.model';
 
 @Component({
   selector: 'app-verify',
@@ -67,7 +67,7 @@ export class Verify implements OnInit {
           if (response.role === 'ADMIN') {
             this.router.navigate(['/admin/dashboard']);
           } else {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/user/dashboard']);
           }
           
           this.isLoading.set(false);

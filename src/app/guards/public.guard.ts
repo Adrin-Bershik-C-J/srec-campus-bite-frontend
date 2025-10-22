@@ -11,7 +11,7 @@ export const PublicGuard: CanActivateFn = (route, state) => {
     if (userData?.role === 'ADMIN') {
       router.navigate(['/admin/dashboard']);
     } else {
-      router.navigate(['/dashboard']);
+      router.navigate(['/user/dashboard']);
     }
     return false;
   }

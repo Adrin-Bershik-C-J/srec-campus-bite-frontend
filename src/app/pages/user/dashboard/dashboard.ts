@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TokenService } from '../../services/token.service';
+import { TokenService } from '../../../services/token.service';
 
 @Component({
   selector: 'app-dashboard',
