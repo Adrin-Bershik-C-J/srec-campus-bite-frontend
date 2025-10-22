@@ -13,6 +13,7 @@ interface JwtPayload {
 })
 export class TokenService {
   private tokenKey = 'token';
+  private userDataKey = 'userData';
 
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
@@ -24,6 +25,16 @@ export class TokenService {
 
   clearToken(): void {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userDataKey);
+  }
+
+  setUserData(userData: any): void {
+    localStorage.setItem(this.userDataKey, JSON.stringify(userData));
+  }
+
+  getUserData(): any {
+    const userData = localStorage.getItem(this.userDataKey);
+    return userData ? JSON.parse(userData) : null;
   }
 
   isTokenValid(): boolean {
