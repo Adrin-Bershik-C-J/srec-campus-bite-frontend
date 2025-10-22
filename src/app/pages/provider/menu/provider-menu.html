@@ -1,0 +1,137 @@
+<div class="provider-menu">
+  <div class="page-header">
+    <h1>Menu Management</h1>
+    <button class="btn btn-primary" (click)="showAddForm()">Add New Item</button>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (successMessage()) {
+    <div class="success-banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+      </svg>
+      {{ successMessage() }}
+    </div>
+  }
+
+  @if (showForm()) {
+    <div class="form-container">
+      <form [formGroup]="menuForm" (ngSubmit)="onSubmit()" class="menu-form">
+        <h2>{{ editingItem() ? 'Edit Menu Item' : 'Add New Menu Item' }}</h2>
+
+        <div class="form-group">
+          <label for="itemName" class="form-label">Item Name</label>
+          <input
+            id="itemName"
+            type="text"
+            formControlName="itemName"
+            class="input"
+            [class.input-error]="getFieldError('itemName')"
+            placeholder="Enter item name"
+          />
+          @if (getFieldError('itemName')) {
+            <div class="form-error">{{ getFieldError('itemName') }}</div>
+          }
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price" class="form-label">Price (₹)</label>
+            <input
+              id="price"
+              type="number"
+              formControlName="price"
+              class="input"
+              [class.input-error]="getFieldError('price')"
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+            />
+            @if (getFieldError('price')) {
+              <div class="form-error">{{ getFieldError('price') }}</div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="tag" class="form-label">Category</label>
+            <select
+              id="tag"
+              formControlName="tag"
+              class="input select"
+              [class.input-error]="getFieldError('tag')"
+            >
+              <option value="">Select category</option>
+              @for (tag of menuTags; track tag) {
+                <option [value]="tag">{{ tag }}</option>
+              }
+            </select>
+            @if (getFieldError('tag')) {
+              <div class="form-error">{{ getFieldError('tag') }}</div>
+            }
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading()">
+            {{ editingItem() ? 'Update Item' : 'Add Item' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="loading">
+      <svg class="spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"/>
+        <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" opacity="0.75"/>
+      </svg>
+      Loading...
+    </div>
+  }
+
+  @if (!isLoading() && menuItems().length > 0) {
+    <div class="menu-grid">
+      @for (item of menuItems(); track item.id) {
+        <div class="menu-card">
+          <div class="menu-card-header">
+            <h3>{{ item.itemName }}</h3>
+            <span class="tag" [class]="'tag-' + item.tag.toLowerCase()">{{ item.tag }}</span>
+          </div>
+          <div class="menu-card-content">
+            <div class="price">₹{{ item.price }}</div>
+            <div class="availability" [class.available]="item.available" [class.unavailable]="!item.available">
+              {{ item.available ? 'Available' : 'Unavailable' }}
+            </div>
+          </div>
+          <div class="menu-card-actions">
+            <button class="btn btn-sm btn-secondary" (click)="editItem(item)">Edit</button>
+            <button 
+              class="btn btn-sm" 
+              [class.btn-success]="!item.available"
+              [class.btn-warning]="item.available"
+              (click)="toggleAvailability(item)">
+              {{ item.available ? 'Mark Unavailable' : 'Mark Available' }}
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteItem(item)">Delete</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (!isLoading() && menuItems().length === 0) {
+    <div class="empty-state">
+      <p>No menu items found. Add your first item to get started!</p>
+    </div>
+  }
+</div>

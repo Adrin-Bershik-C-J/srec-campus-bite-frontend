@@ -62,6 +62,8 @@ export class Login {
           // Role-based redirection
           if (response.role === 'ADMIN') {
             this.router.navigate(['/admin/dashboard']);
+          } else if (response.role === 'PROVIDER') {
+            this.router.navigate(['/provider/dashboard']);
           } else {
             this.router.navigate(['/user/dashboard']);
           }

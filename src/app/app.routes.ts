@@ -6,6 +6,8 @@ import { Dashboard } from './pages/user/dashboard/dashboard';
 import { AdminDashboard } from './pages/admin/dashboard/admin-dashboard';
 import { AdminUsers } from './pages/admin/users/admin-users';
 import { AdminProviders } from './pages/admin/providers/admin-providers';
+import { ProviderDashboard } from './pages/provider/dashboard/provider-dashboard';
+import { ProviderMenu } from './pages/provider/menu/provider-menu';
 import { AuthGuard } from './guards/auth.guard';
 import { PublicGuard } from './guards/public.guard';
 
@@ -48,6 +50,16 @@ export const routes: Routes = [
     {
         path: 'admin/providers',
         component: AdminProviders,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'provider/dashboard',
+        component: ProviderDashboard,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'provider/menu',
+        component: ProviderMenu,
         canActivate: [AuthGuard]
     },
     {

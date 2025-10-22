@@ -10,6 +10,8 @@ export const PublicGuard: CanActivateFn = (route, state) => {
     const userData = tokenService.getUserData();
     if (userData?.role === 'ADMIN') {
       router.navigate(['/admin/dashboard']);
+    } else if (userData?.role === 'PROVIDER') {
+      router.navigate(['/provider/dashboard']);
     } else {
       router.navigate(['/user/dashboard']);
     }
