@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import {jwtDecode} from 'jwt-decode';
-
-interface JwtPayload {
-  sub: string;
-  role: string;
-  exp: number;
-  iat: number;
-}
+import { JwtPayload } from '../models/token.model';
 
 @Injectable({
   providedIn: 'root',
