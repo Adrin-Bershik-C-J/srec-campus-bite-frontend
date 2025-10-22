@@ -29,10 +29,10 @@ export class AdminUsers implements OnInit {
     
     this.adminService.getAllUsers(role, page, 10).subscribe({
       next: (response: PaginatedResponse<UserDto>) => {
-        this.users.set(response.content);
-        this.currentPage.set(response.number);
-        this.totalPages.set(response.totalPages);
-        this.totalElements.set(response.totalElements);
+        this.users.set(response.content || []);
+        this.currentPage.set(response.number || 0);
+        this.totalPages.set(response.totalPages || 1);
+        this.totalElements.set(response.totalElements || 0);
         this.isLoading.set(false);
       },
       error: (error) => {
@@ -59,5 +59,10 @@ export class AdminUsers implements OnInit {
       case 'USER': return 'role-user';
       default: return '';
     }
+  }
+
+  getSerialNumber(index: number): number {
+    const currentPage = this.currentPage() || 0;
+    return (currentPage * 10) + index + 1;
   }
 }

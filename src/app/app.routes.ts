@@ -6,6 +6,8 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { AdminDashboard } from './pages/admin/dashboard/admin-dashboard';
 import { AdminUsers } from './pages/admin/users/admin-users';
 import { AdminProviders } from './pages/admin/providers/admin-providers';
+import { AuthGuard } from './guards/auth.guard';
+import { PublicGuard } from './guards/public.guard';
 
 export const routes: Routes = [
     {
@@ -15,31 +17,38 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        component: Login
+        component: Login,
+        canActivate: [PublicGuard]
     },
     {
         path: 'register',
-        component: Register
+        component: Register,
+        canActivate: [PublicGuard]
     },
     {
         path: 'verify',
-        component: Verify
+        component: Verify,
+        canActivate: [PublicGuard]
     },
     {
         path: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
+        canActivate: [AuthGuard]
     },
     {
         path: 'admin/dashboard',
-        component: AdminDashboard
+        component: AdminDashboard,
+        canActivate: [AuthGuard]
     },
     {
         path: 'admin/users',
-        component: AdminUsers
+        component: AdminUsers,
+        canActivate: [AuthGuard]
     },
     {
         path: 'admin/providers',
-        component: AdminProviders
+        component: AdminProviders,
+        canActivate: [AuthGuard]
     },
     {
         path: '**',

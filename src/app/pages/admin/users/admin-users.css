@@ -152,7 +152,7 @@ tr:hover {
 
 .pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: var(--spacing-md);
   background: var(--bg-secondary);

@@ -37,16 +37,16 @@
       <table>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>S.No</th>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
           </tr>
         </thead>
         <tbody>
-          @for (user of users(); track user.id) {
+          @for (user of users(); track user.id; let i = $index) {
             <tr>
-              <td>{{ user.id }}</td>
+              <td>{{ getSerialNumber(i) }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td>
@@ -61,9 +61,6 @@
     </div>
 
     <div class="pagination">
-      <div class="pagination-info">
-        Showing {{ users().length }} of {{ totalElements() }} users
-      </div>
       <div class="pagination-controls">
         <button 
           class="btn btn-secondary" 
@@ -72,11 +69,11 @@
           Previous
         </button>
         <span class="page-info">
-          Page {{ currentPage() + 1 }} of {{ totalPages() }}
+          Page {{ currentPage() + 1 }} of {{ totalPages() || 1 }}
         </span>
         <button 
           class="btn btn-secondary" 
-          [disabled]="currentPage() >= totalPages() - 1"
+          [disabled]="currentPage() >= (totalPages() - 1) || totalPages() === 0"
           (click)="onPageChange(currentPage() + 1)">
           Next
         </button>
