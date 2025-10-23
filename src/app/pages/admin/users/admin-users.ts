@@ -1,6 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminService, UserDto, PaginatedResponse } from '../../../services/admin.service';
+import { AdminService } from '../../../services/admin.service';
+import { UserDto } from '../../../models/admin.model';
+import { PaginatedResponse } from '../../../models/common.model';
 
 @Component({
   selector: 'app-admin-users',

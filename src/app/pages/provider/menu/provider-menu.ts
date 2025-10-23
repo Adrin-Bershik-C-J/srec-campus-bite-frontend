@@ -1,7 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ProviderService, MenuItemDto, MenuItemRequest } from '../../../services/provider.service';
+import { ProviderService } from '../../../services/provider.service';
+import { MenuItemDto, MenuItemRequest } from '../../../models/provider.model';
 
 @Component({
   selector: 'app-provider-menu',

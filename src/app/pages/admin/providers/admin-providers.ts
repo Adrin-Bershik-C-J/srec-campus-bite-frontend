@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AdminService, ProviderRegisterRequest } from '../../../services/admin.service';
+import { AdminService } from '../../../services/admin.service';
+import { ProviderRegisterRequest } from '../../../models/admin.model';
 
 @Component({
   selector: 'app-admin-providers',
